@@ -1,15 +1,14 @@
-trigger:
-        - main
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker'
+    repository: 'acrlearning'
+    command: 'buildAndPush'
+    image: 1.0
 
-        - pool:
-          vmImage: 'ubuntu-1604' 
-        variables:
-          imageName: 'pipelines-javascript-docker'
-
-        steps:
-        - task: Docker@2
-          displayName: Build an image
-          inputs:
-            repository: $(imageName)
-            command: build
-            Dockerfile: app/Dockerfile
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      Write-Host "Hello World"
